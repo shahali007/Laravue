@@ -1976,7 +1976,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -37489,9 +37488,18 @@ var staticRenderFns = [
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "card-tools" }, [
-                _c("a", { staticClass: "btn btn-info", attrs: { href: "" } }, [
-                  _vm._v("Add New")
-                ])
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-success",
+                    attrs: {
+                      type: "button",
+                      "data-toggle": "modal",
+                      "data-target": "#addUserModal"
+                    }
+                  },
+                  [_vm._v("Add New")]
+                )
               ])
             ]),
             _vm._v(" "),
@@ -37523,7 +37531,7 @@ var staticRenderFns = [
                     _vm._v(" "),
                     _c("td", [_vm._v("Admin")]),
                     _vm._v(" "),
-                    _c("td", [
+                    _c("td", { staticStyle: { width: "100px" } }, [
                       _c(
                         "a",
                         {
@@ -37542,72 +37550,92 @@ var staticRenderFns = [
                         [_c("i", { staticClass: "fas fa-trash" })]
                       )
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("219")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Alexander Pierce")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("11-7-2014")]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("span", { staticClass: "tag tag-warning" }, [
-                        _vm._v("Pending")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        "Bacon ipsum dolor sit amet salami venison chicken flank fatback doner."
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("657")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Bob Doe")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("11-7-2014")]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("span", { staticClass: "tag tag-primary" }, [
-                        _vm._v("Approved")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        "Bacon ipsum dolor sit amet salami venison chicken flank fatback doner."
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("175")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Mike Doe")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("11-7-2014")]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("span", { staticClass: "tag tag-danger" }, [
-                        _vm._v("Denied")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        "Bacon ipsum dolor sit amet salami venison chicken flank fatback doner."
-                      )
-                    ])
                   ])
                 ])
               ])
             ])
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "addUserModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "addUserModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-dialog-centered",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "addUserModalLabel" }
+                      },
+                      [_vm._v("Modal title")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "close",
+                        attrs: {
+                          type: "button",
+                          "data-dismiss": "modal",
+                          "aria-label": "Close"
+                        }
+                      },
+                      [
+                        _c("span", { attrs: { "aria-hidden": "true" } }, [
+                          _vm._v("×")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _vm._v(
+                      "\n                        ...\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" }
+                      },
+                      [_vm._v("Save changes")]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
       ])
     ])
   }
@@ -52932,9 +52960,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\project\php\laravue\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! G:\project\php\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! G:\project\php\laravue\resources\sass\style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! D:\php\laravue\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\php\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\php\laravue\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })
