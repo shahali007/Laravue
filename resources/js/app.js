@@ -7,9 +7,15 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import { Form, HasError, AlertError } from 'vform'
+
+window.Form = Form;
+Vue.component(HasError.name, HasError);
+Vue.component(AlertError.name, AlertError);
+
 import VueRouter from 'vue-router'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 const routes = [
     { path: '/home', component: require('./components/HomeComponent').default },
     { path: '/dashboard', component: require('./components/DashboardComponent').default },
