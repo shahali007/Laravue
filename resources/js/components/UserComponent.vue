@@ -26,7 +26,7 @@
                                 <td>{{ index+1 }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.email }}</td>
-                                <td>{{ date('Y') - user.created_at }}</td>
+                                <td>{{ formatDateMysql(user.created_at) }}</td>
                                 <td style="width:100px;">
                                     <button class="btn btn-outline-primary btn-sm"><i class="fas fa-pencil-alt"></i></button>
                                     <button class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>

@@ -27,6 +27,34 @@ const router = new VueRouter({
     routes
 });
 
+Vue.mixin({
+    methods: {
+        formatDateMysql(mysqldate) {
+            // regular expression split that creates array with: year, month, day, hour, minutes, seconds values
+            let dateTimeParts= mysqldate.split(/[- :]/);
+
+            // monthIndex begins with 0 for January and ends with 11 for December so we need to decrement by one
+            dateTimeParts[1]--;
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            const d = new Date(...dateTimeParts); // our Date object
+            var dd   = d.getDate();
+            var hour = d.getHours();
+            var minu = d.getMinutes();
+
+            if(dd<10)  { dd='0'+dd }
+            if(minu<10){ minu='0'+minu }
+
+            var amOrPm = (d.getHours() < 12) ? "AM" : "PM";
+            var hour = (d.getHours() < 12) ? d.getHours() : d.getHours() - 12;
+            // monthNames[d.getUTCMonth()].toUpperCase()+" "+dd+", "+d.getUTCFullYear()+" "+hour+":"+minu +" "+amOrPm;
+            return monthNames[d.getUTCMonth()]+" "+dd+", "+d.getUTCFullYear();
+        }
+    }
+});
+
 
 /**
  * The following block of code may be used to automatically register your

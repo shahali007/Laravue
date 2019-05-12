@@ -38546,7 +38546,7 @@ var render = function() {
                       _c("td", [_vm._v(_vm._s(user.email))]),
                       _vm._v(" "),
                       _c("td", [
-                        _vm._v(_vm._s(_vm.date("Y") - user.created_at))
+                        _vm._v(_vm._s(_vm.formatDateMysql(user.created_at)))
                       ]),
                       _vm._v(" "),
                       _vm._m(2, true)
@@ -53781,6 +53781,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.common.js");
 /* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vform__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -53811,6 +53825,37 @@ var routes = [{
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   routes: routes
+});
+Vue.mixin({
+  methods: {
+    formatDateMysql: function formatDateMysql(mysqldate) {
+      // regular expression split that creates array with: year, month, day, hour, minutes, seconds values
+      var dateTimeParts = mysqldate.split(/[- :]/); // monthIndex begins with 0 for January and ends with 11 for December so we need to decrement by one
+
+      dateTimeParts[1]--;
+      var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+      var d = _construct(Date, _toConsumableArray(dateTimeParts)); // our Date object
+
+
+      var dd = d.getDate();
+      var hour = d.getHours();
+      var minu = d.getMinutes();
+
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+
+      if (minu < 10) {
+        minu = '0' + minu;
+      }
+
+      var amOrPm = d.getHours() < 12 ? "AM" : "PM";
+      var hour = d.getHours() < 12 ? d.getHours() : d.getHours() - 12; // monthNames[d.getUTCMonth()].toUpperCase()+" "+dd+", "+d.getUTCFullYear()+" "+hour+":"+minu +" "+amOrPm;
+
+      return monthNames[d.getUTCMonth()] + " " + dd + ", " + d.getUTCFullYear();
+    }
+  }
 });
 /**
  * The following block of code may be used to automatically register your
