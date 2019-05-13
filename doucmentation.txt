@@ -1,0 +1,7 @@
+Additional Node Package Manager:
+=================================
+Vue-router
+Vue-progressbar
+Vform
+Sweetalert
+

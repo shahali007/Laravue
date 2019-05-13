@@ -2,3 +2,12 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+.fade-transition {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter,
+.fade-leave {
+  opacity: 0;
+}
+

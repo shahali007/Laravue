@@ -1,4 +1,10 @@
 .router-link-exact-active {
   background: rgba(255, 255, 255, 0.1); }
 
+.fade-transition {
+  transition: opacity .5s ease; }
+
+.fade-enter, .fade-leave {
+  opacity: 0; }
+
 /*# sourceMappingURL=style.css.map */

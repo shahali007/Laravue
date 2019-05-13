@@ -7,14 +7,59 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import { Form, HasError, AlertError } from 'vform'
 
+
+/**
+|-------------------------------------------------
+| @Progress bar
+| @npm package name : 'vue-progressbar'
+|-------------------------------------------------
+*/
+import VueProgressBar from 'vue-progressbar'
+Vue.use(VueProgressBar, {
+    height: '12px',
+    color: 'rgb(0, 255, 123)',
+    failedColor: 'red'
+});
+
+
+/**
+|-------------------------------------------------
+| @Form validation
+| @npm package name : 'vform'
+|-------------------------------------------------
+*/
+import { Form, HasError, AlertError } from 'vform'
 window.Form = Form;
 Vue.component(HasError.name, HasError);
 Vue.component(AlertError.name, AlertError);
 
-import VueRouter from 'vue-router'
 
+/**
+ |-------------------------------------------------
+ | @sweetalert for alert, confirm, success popup
+ | @npm package name : 'sweetalert2'
+ |-------------------------------------------------
+ */
+import Swal from 'sweetalert2';
+window.Swal = Swal;
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+window.Toast = Toast;
+
+
+
+/**
+|-------------------------------------------------
+| @Vue JS Router
+| @npm package name : 'vue-router'
+|-------------------------------------------------
+*/
+import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 const routes = [
     { path: '/home', component: require('./components/HomeComponent').default },
@@ -27,6 +72,14 @@ const router = new VueRouter({
     routes
 });
 
+
+/**
+|-------------------------------------------------
+| @Custom Global Functions
+| @depends on : 'Vue.mixin'
+| @every function must create inside 'methods'
+|-------------------------------------------------
+*/
 Vue.mixin({
     methods: {
         formatDateMysql(mysqldate) {
@@ -57,6 +110,14 @@ Vue.mixin({
 
 
 /**
+ |-------------------------------------------------
+ | @Fire
+ |
+ |-------------------------------------------------
+ */
+window.Fire = new Vue();
+
+/**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
@@ -75,6 +136,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+/**
+|-------------------------------------------------
+| Initialization
+|-------------------------------------------------
+*/
 const app = new Vue({
     router
 }).$mount('#app')

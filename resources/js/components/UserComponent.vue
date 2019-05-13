@@ -1,13 +1,25 @@
 <template>
     <div>
+        <div class="content-header">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h2 class="m-0 text-dark">User List</h2>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><router-link to="/home">Home</router-link></li>
+                        <li class="breadcrumb-item active">User List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Responsive Hover Table</h3>
+                        <h3 class="card-title">User List</h3>
                         <div class="card-tools">
-                            <button type="button" class="btn btn-outline-success" data-toggle="modal"
-                                    data-target="#addUserModal">Add New
+                            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addUserModal">Add New
                             </button>
                         </div>
                     </div>
@@ -18,6 +30,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+
                                 <th>Email</th>
                                 <th>Registered Date</th>
                                 <th>Modify</th>
@@ -28,8 +41,8 @@
                                 <td>{{ user.email }}</td>
                                 <td>{{ formatDateMysql(user.created_at) }}</td>
                                 <td style="width:100px;">
-                                    <button class="btn btn-outline-primary btn-sm"><i class="fas fa-pencil-alt"></i></button>
-                                    <button class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                    <button class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="btn btn-outline-danger btn-sm" v-on:click="deleteUser(user)" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                             </tbody>
@@ -109,20 +122,70 @@
             }
         },
         methods :{
+            createUser(){
+                this.form.post('api/user')
+                .then(() => {
+                    this.$Progress.start();
+                    Fire.$emit('AfterCreate');
+                    $('#addUserModal').modal('hide');
+                    Swal.fire({
+                        position: 'top-end',
+                        type: 'success',
+                        title: 'User has been added successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    this.$Progress.finish();
+                    this.form.reset ();
+                });
+            },
             loadUsers(){
                 axios.get('api/user').then(({data})=> {this.users = data.data;console.log(data);});
             },
-            createUser(){
-                this.form.post('api/user')
-                    .then(({ data }) => { console.log(data) });
-                console.log('Create user fired!');
+            deleteUser(user){
+                Swal.fire({
+                    title: 'Are you sure?'+user.name,
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        this.form.delete('api/user/'+user.id)
+                        .then(()=>{
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            );
+                            Fire.$emit('AfterCreate');
+                        })
+                        .catch(()=>{
+                            Swal("Failed!","There was something wrong!","warning");
+                        });
+
+                    }
+                })
             }
         },
         created(){
             this.loadUsers();
+            Fire.$on('AfterCreate', ()=> {
+                this.loadUsers()
+            });
+            //setInterval(() => this.loadUsers(), 3000);
         },
         mounted() {
-            console.log('Component mounted.')
+            //console.log('Component mounted.');
+            document.onreadystatechange = () => {
+
+                    $(function () {
+                        $('[data-toggle="tooltip"]').tooltip()
+                    })
+
+            }
         }
     }
 </script>
