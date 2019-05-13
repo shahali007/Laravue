@@ -38,7 +38,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4" >
             <!-- Brand Logo -->
-            <a href="" class="brand-link">
+            <a href="{{ url('home') }}" class="brand-link">
                 <img src="{{ asset('images/logo.png') }}" alt="AdminLTE Logo" class="brand-image"
                      style="opacity: .8">
                 <span class="brand-text font-weight-light">Laravue</span>
@@ -66,13 +66,24 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
+                            <router-link to="/users" class="nav-link">
+                                <i class="nav-icon fa fa-users-cog"></i>
+                                <p>Users</p>
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link to="/profile" class="nav-link">
-                                <i class="nav-icon fas fas fa-users-cog"></i>
+                                <i class="nav-icon fas fa-tools"></i>
                                 <p>Profile</p>
                             </router-link>
                         </li>
-
                         <li class="nav-item">
+                            <router-link to="/" class="nav-link">
+                                <i class="nav-icon fas fas fa-users-cog"></i>
+                                <p>Management</p>
+                            </router-link>
+                        </li>
+                        <li class="nav-item  mt-5 pt-5">
                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="nav-icon fas fa-power-off"></i>
                                 <p>
@@ -83,29 +94,6 @@
                                 @csrf
                             </form>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tools"></i>
-                                <p>
-                                    Management
-                                    <i class="right fa fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <router-link to="/users" class="nav-link ml-3">
-                                        <i class="fa fa-users-cog"></i>
-                                        <p>Users</p>
-                                    </router-link>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Inactive Page</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -114,23 +102,6 @@
         </aside>
 
         <div class="content-wrapper">
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Starter Page</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Starter Page</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.content-header -->
-
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
@@ -149,7 +120,7 @@
                 <p>Sidebar content</p>
             </div>
         </aside>
-        <!-- /.control-sidebar -->
+
 
         <!-- Main Footer -->
         <footer class="main-footer">
