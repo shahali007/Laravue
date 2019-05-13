@@ -17,9 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::apiResource('user', 'API\UserController');
-
-// You may register many API resource controllers at once by passing an array
 Route::apiResources([
     'user' => 'API\UserController'
 ]);
