@@ -5,3 +5,4 @@ Vue-progressbar
 Vform
 Sweetalert
 
+Laravel passport
