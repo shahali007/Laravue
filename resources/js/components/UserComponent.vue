@@ -20,6 +20,7 @@
                         <h3 class="card-title">User List</h3>
                         <div class="card-tools">
                             <!--<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addUserModal">Add New</button>-->
+                            <a href="">ss</a>
                             <button type="button" class="btn btn-outline-success" v-on:click="newModal">Add New</button>
                         </div>
                     </div>
@@ -112,8 +113,9 @@
 
 <script>
     export default {
-        data () {
-            return {
+        data ()
+        {
+            return{
                 editmode : false,
                 updateUserName : '',
                 users : {},
