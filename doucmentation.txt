@@ -6,3 +6,13 @@ Vform
 Sweetalert
 
 Laravel passport
+
+
+===============================
+Laravel Passport information :
+
+Client ID: 1
+Client secret: LxFtkuc63RisHQEPrlu4fgsdDoOA94z7UDd53Dec
+
+Client ID: 2
+Client secret: FuXsnU8LhN04FaUGbJY7GF7vtLOippAiC8pUvk6E

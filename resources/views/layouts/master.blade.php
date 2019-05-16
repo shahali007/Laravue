@@ -66,8 +66,14 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
+                            <router-link to="/developer" class="nav-link">
+                                <i class="nav-icon fas fas fa-atom"></i>
+                                <p>Developer</p>
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link to="/profile" class="nav-link">
-                                <i class="nav-icon fas fas fa-users-cog"></i>
+                                <i class="nav-icon fas fas fa-portrait"></i>
                                 <p>Profile</p>
                             </router-link>
                         </li>
