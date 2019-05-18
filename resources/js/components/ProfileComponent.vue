@@ -70,8 +70,15 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="inputPhoto" class="col-sm-2 control-label">Photo</label>
+
+                                        <div class="col-sm-10">
+                                            <input v-on:change="updatePhoto" type="file" class="form-control" name="photo" id="inputPhoto" placeholder="Photo">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">Submit</button>
+                                            <button type="submit" v-on:click.prevent="updateInfo" class="btn btn-danger">Submit</button>
                                         </div>
                                     </div>
                                 </form>
@@ -94,8 +101,29 @@
                     email: '',
                     password: '',
                     password_confirmation: '',
-                    remember_token: true
+                    remember_token: true,
+                    photo : ''
                 })
+            }
+        },
+        methods : {
+            updatePhoto(element){
+                let file = element.target.files[0];
+                let reader = new FileReader();
+                reader.onloadend = (file)=> {
+                    //console.log('RESULT', reader.result);
+                    this.form.photo = reader.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            updateInfo(){
+                this.form.put('api/profle')
+                    .then(()=>{
+
+                    })
+                    .catch(()=>{
+
+                    });
             }
         },
         mounted() {
@@ -107,3 +135,4 @@
         }
     }
 </script>
+

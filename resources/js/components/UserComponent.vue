@@ -112,8 +112,7 @@
 
 <script>
     export default {
-        data ()
-        {
+        data (){
             return{
                 editmode : false,
                 updateUserName : '',
