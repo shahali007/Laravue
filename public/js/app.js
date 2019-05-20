@@ -2035,17 +2035,26 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var file = element.target.files[0];
+      console.log(file['size']);
       var reader = new FileReader();
 
-      reader.onloadend = function (file) {
-        //console.log('RESULT', reader.result);
-        _this.form.photo = reader.result;
-      };
+      if (file['size'] < 2097152) {
+        reader.onloadend = function (file) {
+          //console.log('RESULT', reader.result);
+          _this.form.photo = reader.result;
+        };
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      } else {
+        Swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Your file is larger than 2MB.'
+        });
+      }
     },
     updateInfo: function updateInfo() {
-      this.form.put('api/profle').then(function () {})["catch"](function () {});
+      this.form.put('api/profile').then(function () {})["catch"](function () {});
     }
   },
   mounted: function mounted() {
@@ -43134,7 +43143,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "text-muted text-center" }, [
-              _vm._v("Software Engineer")
+              _vm._v("Web Developer")
             ]),
             _vm._v(" "),
             _vm._m(2),

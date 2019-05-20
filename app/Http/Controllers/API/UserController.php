@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::latest()->paginate(15);
+        return User::latest()->paginate(50);
     }
 
     /**
@@ -93,8 +93,10 @@ class UserController extends Controller
     }
 
 
-    public function updateProfile(){
-
+    public function updateProfile(Request $request){
+        $user = auth('api')->user();
+        return $request->photo;
+        //return ['message'=>'Update button clicking.....'];
     }
 
     /**

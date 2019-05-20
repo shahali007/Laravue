@@ -22,7 +22,7 @@
                             <img class="profile-user-img img-fluid img-circle" src="/images/user.png" alt="User profile picture">
                         </div>
                         <h3 class="profile-username text-center">{{form.name}}</h3>
-                        <p class="text-muted text-center">Software Engineer</p>
+                        <p class="text-muted text-center">Web Developer</p>
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
                                 <b>Followers</b> <a class="float-right">1,322</a>
@@ -109,15 +109,26 @@
         methods : {
             updatePhoto(element){
                 let file = element.target.files[0];
+                console.log(file['size']);
                 let reader = new FileReader();
-                reader.onloadend = (file)=> {
-                    //console.log('RESULT', reader.result);
-                    this.form.photo = reader.result;
-                };
-                reader.readAsDataURL(file);
+                if (file['size'] < 2097152){
+                    reader.onloadend = (file)=> {
+                        //console.log('RESULT', reader.result);
+                        this.form.photo = reader.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+                else {
+                    Swal.fire({
+                        type:  'error',
+                        title: 'Oops...',
+                        text:  'Your file is larger than 2MB.'
+                    });
+                }
+
             },
             updateInfo(){
-                this.form.put('api/profle')
+                this.form.put('api/profile')
                     .then(()=>{
 
                     })
