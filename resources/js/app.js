@@ -81,6 +81,12 @@ const router = new VueRouter({
 |-------------------------------------------------
 */
 Vue.mixin({
+    data(){
+        return {
+            appUrl: process.env.MIX_APP_URL,
+            profileImagePath: process.env.MIX_APP_URL + 'images/profile/',
+        }
+    },
 
     methods: {
         formatDateMysql(mysqldate) {

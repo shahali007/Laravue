@@ -19,7 +19,7 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="/images/user.png" alt="User profile picture">
+                            <img class="profile-user-img img-fluid img-circle" :src="'images/profile/'+form.photo" alt="User profile picture">
                         </div>
                         <h3 class="profile-username text-center">{{form.name}}</h3>
                         <p class="text-muted text-center">Web Developer</p>

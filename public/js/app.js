@@ -43136,7 +43136,15 @@ var render = function() {
       _c("div", { staticClass: "col-md-3" }, [
         _c("div", { staticClass: "card card-primary card-outline" }, [
           _c("div", { staticClass: "card-body box-profile" }, [
-            _vm._m(1),
+            _c("div", { staticClass: "text-center" }, [
+              _c("img", {
+                staticClass: "profile-user-img img-fluid img-circle",
+                attrs: {
+                  src: "images/profile/" + _vm.form.photo,
+                  alt: "User profile picture"
+                }
+              })
+            ]),
             _vm._v(" "),
             _c("h3", { staticClass: "profile-username text-center" }, [
               _vm._v(_vm._s(_vm.form.name))
@@ -43146,20 +43154,20 @@ var render = function() {
               _vm._v("Web Developer")
             ]),
             _vm._v(" "),
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
-            _vm._m(3)
+            _vm._m(2)
           ])
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-9" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(4),
+          _vm._m(3),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "tab-content" }, [
-              _vm._m(5),
+              _vm._m(4),
               _vm._v(" "),
               _c(
                 "div",
@@ -43306,17 +43314,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-6" }, [
       _c("h2", { staticClass: "m-0 text-dark" }, [_vm._v("Profile")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center" }, [
-      _c("img", {
-        staticClass: "profile-user-img img-fluid img-circle",
-        attrs: { src: "/images/user.png", alt: "User profile picture" }
-      })
     ])
   },
   function() {
@@ -59955,6 +59952,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
 */
 
 Vue.mixin({
+  data: function data() {
+    return {
+      appUrl: Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).MIX_APP_URL,
+      profileImagePath: Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).MIX_APP_URL + 'images/profile/'
+    };
+  },
   methods: {
     formatDateMysql: function formatDateMysql(mysqldate) {
       // regular expression split that creates array with: year, month, day, hour, minutes, seconds values
