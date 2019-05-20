@@ -109,7 +109,7 @@
         methods : {
             updatePhoto(element){
                 let file = element.target.files[0];
-                console.log(file['size']);
+                //console.log(file['size']);
                 let reader = new FileReader();
                 if (file['size'] < 2097152){
                     reader.onloadend = (file)=> {
@@ -125,7 +125,6 @@
                         text:  'Your file is larger than 2MB.'
                     });
                 }
-
             },
             updateInfo(){
                 this.form.put('api/profile')

@@ -21,3 +21,21 @@ Client secret: FuXsnU8LhN04FaUGbJY7GF7vtLOippAiC8pUvk6E
 Testng API
 ================================
 eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjkyYWUzMTM2MThmZDEwMTI2NThiY2MzNDE5NDcyMTViNTkzNmRiYzA3YTIyYjBhYTQyNzRlZjYyMDc2MmQ4MzgyZmIzNWFmN2FlODM1N2IwIn0.eyJhdWQiOiIxIiwianRpIjoiOTJhZTMxMzYxOGZkMTAxMjY1OGJjYzM0MTk0NzIxNWI1OTM2ZGJjMDdhMjJiMGFhNDI3NGVmNjIwNzYyZDgzODJmYjM1YWY3YWU4MzU3YjAiLCJpYXQiOjE1NTc5NzkzMTMsIm5iZiI6MTU1Nzk3OTMxMywiZXhwIjoxNTg5NjAxNzEzLCJzdWIiOiI1MCIsInNjb3BlcyI6W119.PD_bl__pGXOZyXt0t3fEJyucjafI850zRXxfAAPwCI6sy6TpF9lG7ca_G5qAyOlyMW04G8DikKJ6k93T1isOyvV4VShuIq2-FfTOBfFqpquoHCIN3PpLXOzsoCc8zEivLc3tugu1wNI3ArZswCG-XYG0KJqPiFtpctle3Q8cksyfMYFVU_zApnuKKatV1q2ZyiiW54Msk6xrvehJY56qzxL7vhfqSYE_lIIOTZwcwjm9PKJ62n6sLXLhkvUJplTEttJxGh39OAAXFGhs-jjDaWeEw-MU59O1ZHiu1ug68BTUB917aZFR32cV4fLkANMPE1z7pfdzbupn7F_JvspW4-KmroOKkHqvwyntnsgZaWci_62_g6I5Fc8KBF2BLA8VN6H8bvymFhFhF5_5A-pTgfMQWk8Ai4GYsIGWiuYK7oF10dgF-aJdXIN1si_eDN5yR1T4eRBcNmZdnA6cOjDQwNPDnqrDKXe3YIYcWzPsnd7_0ba4IG9Nu8h_6HXPnIUGgDZyGjTC15wKQOrD4Xp22Gs5l-H-fao_MQo6nmgOWwwlKCBXr4DIs0FwbhVbLT2kZrXmI1Eou_gZjXPXER6shN4EqU4-7jgSc_KR4etRAnCoZYB47w0Lsy705t5TdAFDRLsKq58abhy82FQtfdPvQrxJz6lZmVL4zivxQBjwOZQ
+
+
+
+Intervention :
+--------------------
+composer.phar require intervention/image
+
+
+add the following code in config/app.php:
+Intervention\Image\ImageServiceProvider::class
+
+
+Add the facade of this package to the $aliases array:
+'Image' => Intervention\Image\Facades\Image::class
+
+
+Publish configuration in Laravel 5:
+php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravel5"

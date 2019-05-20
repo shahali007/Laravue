@@ -3,38 +3,41 @@
 namespace App\Http\Controllers\API;
 
 use App\User;
+use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+use Hash;
+use Image;
 
 class UserController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    |--------------------------
+    | Constructor Function
+    |--------------------------
+    */
     public function __construct()
     {
         $this->middleware('auth:api');
     }
 
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    |--------------------------
+    | Index Function
+    |--------------------------
+    */
     public function index()
     {
         return User::latest()->paginate(50);
     }
 
+
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    |--------------------------
+    | Show Function
+    |--------------------------
+    */
     public function store(Request $request)
     {
         //dd($request->all());
@@ -51,30 +54,33 @@ class UserController extends Controller
         ]);
     }
 
+
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    |--------------------------
+    | Show Function
+    |--------------------------
+    */
     public function show($id)
     {
         //
     }
 
 
+    /**
+    |--------------------------
+    | Profile Function
+    |--------------------------
+    */
     public function profile(){
         return auth('api')->user();
     }
 
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    |--------------------------
+    | Update Function
+    |--------------------------
+    */
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -93,18 +99,28 @@ class UserController extends Controller
     }
 
 
+    /**
+    |--------------------------
+    | Update Profile Function
+    |--------------------------
+    */
     public function updateProfile(Request $request){
         $user = auth('api')->user();
-        return $request->photo;
-        //return ['message'=>'Update button clicking.....'];
+        $currentPhoto = $user->photo;
+        if($request->photo != $currentPhoto){
+            $file = time().'.'.explode('/',explode(':',substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+            Image::make($request->photo)->save(public_path('images/profile/').$file);
+        }
+        //dd($request->all());
+
     }
 
+
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    |--------------------------
+    | Delete Function
+    |--------------------------
+    */
     public function destroy($id)
     {
         $user = User::findOrFail($id);

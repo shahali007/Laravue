@@ -2034,8 +2034,8 @@ __webpack_require__.r(__webpack_exports__);
     updatePhoto: function updatePhoto(element) {
       var _this = this;
 
-      var file = element.target.files[0];
-      console.log(file['size']);
+      var file = element.target.files[0]; //console.log(file['size']);
+
       var reader = new FileReader();
 
       if (file['size'] < 2097152) {
