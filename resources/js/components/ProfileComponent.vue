@@ -19,7 +19,7 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" :src="'images/profile/'+form.photo" alt="User profile picture">
+                            <img class="profile-user-img img-fluid img-circle" :src="getProfilePhoto()" alt="User profile picture">
                         </div>
                         <h3 class="profile-username text-center">{{form.name}}</h3>
                         <p class="text-muted text-center">Web Developer</p>
@@ -54,26 +54,28 @@
                             </div>
 
                             <div class="tab-pane active show" id="settings">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                                         <div class="col-sm-10">
-                                            <input v-model="form.name" type="text" class="form-control" id="inputName" placeholder="Name">
+                                            <input v-model="form.name" type="text" class="form-control" id="inputName" placeholder="Name" v-bind:class="{ 'is-invalid' : form.errors.has('name') }">
+                                            <has-error v-bind:form="form" field="name"></has-error>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                                         <div class="col-sm-10">
-                                            <input v-model="form.email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                            <input v-model="form.email" type="email" class="form-control" id="inputEmail" placeholder="Email" v-bind:class="{ 'is-invalid' : form.errors.has('email') }">
+                                            <has-error v-bind:form="form" field="email"></has-error>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputPhoto" class="col-sm-2 control-label">Photo</label>
+                                        <label for="photo" class="col-sm-2 control-label">Photo</label>
 
                                         <div class="col-sm-10">
-                                            <input v-on:change="updatePhoto" type="file" class="form-control" name="photo" id="inputPhoto" placeholder="Photo">
+                                            <input v-on:change="updatePhoto" type="file" class="form-control" name="photo" id="photo" placeholder="Photo">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -107,8 +109,13 @@
             }
         },
         methods : {
+            getProfilePhoto(){
+                let photo = (this.form.photo.length > 200) ? this.form.photo : "images/profile/"+this.form.photo;
+                return photo;
+            },
             updatePhoto(element){
                 let file = element.target.files[0];
+
                 //console.log(file['size']);
                 let reader = new FileReader();
                 if (file['size'] < 2097152){
@@ -129,10 +136,18 @@
             updateInfo(){
                 this.form.put('api/profile')
                     .then(()=>{
+                        this.$Progress.start();
+                        Fire.$emit('AfterUpdate');
+                        Swal.fire(
+                            'success!',
+                            'User information has been updated.',
+                            'success'
+                        );
 
+                        this.$Progress.finish();
                     })
                     .catch(()=>{
-
+                        this.$Progress.fail();
                     });
             }
         },
@@ -141,7 +156,7 @@
         },
         created(){
             axios.get("api/profile")
-                .then(({data}) => (this.form.fill(data)))
+                .then(({data}) => (this.form.fill(data)));
         }
     }
 </script>

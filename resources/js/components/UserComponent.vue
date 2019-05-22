@@ -32,6 +32,7 @@
                                 <th>Name</th>
 
                                 <th>Email</th>
+                                <th>Role/Type</th>
                                 <th>Registered Date</th>
                                 <th>Modify</th>
                             </tr>
@@ -39,6 +40,9 @@
                                 <td>{{ index+1 }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.email }}</td>
+                                <td>
+                                    <span v-for="role in roles" :key="role.id" v-if="role.id === user.type">{{ role.name }}</span>
+                                </td>
                                 <td>{{ formatDateMysql(user.created_at) }}</td>
                                 <td style="width:100px;">
                                     <button class="btn btn-outline-primary btn-sm" v-on:click="editModal(user)" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-pencil-alt"></i></button>
@@ -83,6 +87,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="type" class="col-md-4 col-form-label text-md-right">Role/Type</label>
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="type" id="type" v-model="form.type" v-bind:class="{'is-invalid' : form.errors.has('type')}">
+                                            <option v-for="role in roles" selected="role.id == 3 ? true : false " :key="role.id" :value="role.id">{{ role.name }}</option>
+                                        </select>
+                                        <has-error v-bind:form="form" field="type"></has-error>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                     <div class="col-md-6">
                                         <input type="password" name="password" id="password" v-model="form.password" v-bind:class="{'is-invalid' : form.errors.has('password')}" class="form-control" >
@@ -114,6 +127,11 @@
     export default {
         data (){
             return{
+                roles : [
+                    { id : 1, name : 'Admin'},
+                    { id : 2, name : 'Author'},
+                    { id : 3, name : 'User'}
+                ],
                 editmode : false,
                 updateUserName : '',
                 users : {},
@@ -121,6 +139,7 @@
                     id : '',
                     name: '',
                     email: '',
+                    type: 0,
                     password: '',
                     password_confirmation: '',
                     remember_token: true

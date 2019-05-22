@@ -84,7 +84,7 @@ Vue.mixin({
     data(){
         return {
             appUrl: process.env.MIX_APP_URL,
-            profileImagePath: process.env.MIX_APP_URL + 'images/profile/',
+            profileImagePath: process.env.MIX_APP_URL + '/images/profile/',
         }
     },
 

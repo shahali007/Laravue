@@ -44,12 +44,14 @@ class UserController extends Controller
          $request->validate([
             'name'          => 'required|max:191|',
             'email'         => 'required|string|email|max:255|unique:users',
+            'type'          => 'required',
             'password'      => 'required|string|min:6|confirmed',
         ]);
 
         return User::create([
             'name'          => $request['name'],
             'email'         => $request['email'],
+            'type'          => $request['type'],
             'password'      => Hash::make($request['password']),
         ]);
     }
@@ -87,11 +89,13 @@ class UserController extends Controller
         $request->validate([
             'name'          => 'required|max:191|',
             'email'         => 'required|string|email|max:191|unique:users,email,'.$user->id,
+            'type'          => 'required',
             'password'      => 'sometimes|min:6|confirmed',
         ]);
 
         $user->name         = $request['name'];
         $user->email        = $request['email'];
+        $user->type         = $request['type'];
         if ($request['password']){
             $user->password = Hash::make($request['password']);
         }
@@ -104,28 +108,30 @@ class UserController extends Controller
     | Update Profile Function
     |--------------------------
     */
-    public function updateProfile(Request $request){
+    public function updateProfile(Request $request)
+    {
         $user = auth('api')->user();
         $request->validate([
             'name'          => 'required|max:191|',
             'email'         => 'required|string|email|max:191|unique:users,email,'.$user->id,
-            'password'      => 'sometimes|min:6|confirmed',
         ]);
-
         $user->name         = $request['name'];
         $user->email        = $request['email'];
 
-        $currentPhoto = $user->photo;
-        if($request->photo != $currentPhoto){
-            $file = time().'.'.explode('/',explode(':',substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
-            \Image::make($request->photo)->save(public_path('images/profile/').$file);
-            $user->photo = $file;
+        $currentPhoto       = $user->photo;
+        if ($request->photo !=$currentPhoto){
+            $name = str_replace(' ', '-', $user->name).'-'.time().'.'.explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+            Image::make($request->photo)->save(public_path('/images/profile/').$name);
+            $user->photo      = $name;
+
+            $userPhoto = public_path('/images/profile/').$currentPhoto;
+            if (file_exists($userPhoto)){
+                @unlink($userPhoto);
+            }
         }
-        //dd($request->all());
-
+        //$user->photo      = $request->photo;
         $user->save();
-        return ['msg'=>'updated!'];
-
+        return ['msg' => 'updated!'];
     }
 
 
