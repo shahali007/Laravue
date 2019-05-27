@@ -5,6 +5,7 @@
   transition: opacity .5s ease; }
 
 .fade-enter, .fade-leave {
-  opacity: 0; }
+  opacity: 0;
+  color: #000; }
 
 /*# sourceMappingURL=style.css.map */

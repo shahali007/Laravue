@@ -5,6 +5,7 @@ Vue-progressbar
 Vform
 Sweetalert
 Laravel passport
+Image intervention
 
 
 
