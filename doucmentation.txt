@@ -26,6 +26,8 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjkyYWUzMTM2MThmZDEwMTI2NThiY2MzNDE5
 
 
 Intervention :
+**Phpstorm made problem to install intervention.
+**Please use cmd/poweshell/git bash
 --------------------
 composer.phar require intervention/image
 
